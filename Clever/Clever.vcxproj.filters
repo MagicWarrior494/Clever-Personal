@@ -30,6 +30,12 @@
     <ClCompile Include="src\Clever\WorldManager\Components\ComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Clever\Window\WindowManager.h">
@@ -72,6 +78,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Clever\WorldManager\MeshData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\HelperStructs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

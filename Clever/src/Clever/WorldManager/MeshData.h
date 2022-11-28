@@ -47,10 +47,6 @@ public:
 
 	void createIndexBuffer(std::vector<uint16_t> indices)
 	{
-		for (int i = 0; i < indices.size(); i++)
-		{
-			indices[i]--;
-		}
 		indicesSize = indices.size();
 		VkDeviceSize bufferSize = sizeof(indices[0]) * indices.size();
 

@@ -47,18 +47,22 @@ namespace World
 				
 
 
-				Vertex vertex(glm::vec3(0, 10, 0), glm::vec3(1,0,0));
-				Vertex vertex1(glm::vec3(-10, -10, 0), glm::vec3(0,1,0));
-				Vertex vertex2(glm::vec3(10, -10, 0), glm::vec3(0,0,1));
+				Vertex vertex(glm::vec3(1, 1, 0), glm::vec3(0,0,1));
+				Vertex vertex1(glm::vec3(-1, 1, 0), glm::vec3(0,1,0));
+				Vertex vertex2(glm::vec3(1, -1, 0), glm::vec3(1,0,0));
+				Vertex vertex3(glm::vec3(-1, -1, 0), glm::vec3(0,1,1));
 				
 				vertices.push_back(vertex);
 				vertices.push_back(vertex1);
 				vertices.push_back(vertex2);
+				vertices.push_back(vertex3);
 
 				indices.push_back(0);
 				indices.push_back(1);
 				indices.push_back(2);
-
+				indices.push_back(3);
+				indices.push_back(2);
+				indices.push_back(1);
 
 
 				rend.setComponentData(vertices, indices);
@@ -82,14 +86,14 @@ namespace World
 		ComponentManager componentManager{};
 
 		std::vector<Vertex> vertices = {
-		/*{{1.0, 1.0, -1.0}, {0.0f, 0.0f, 0.0f}},
-		{{1.0,  -1.0, -1.0}, {1.0f, 0.0f, 0.0f}},
-		{{1.0,  1.0,  1.0}, {0.0f, 1.0f, 0.0f}},
-		{{1.0,  -1.0, 1.0}, {1.0f, 1.0f, 0.0f}},
-		{{-1.0, 1.0,  -1.0}, {0.0f, 0.0f, 1.0f}},
-		{{-1.0, -1.0, -1.0}, {1.0f, 0.0f, 1.0f}},
-		{{-1.0, 1.0,  1.0}, {0.0f, 1.0f, 1.0f}},
-		{{-1.0, -1.0, 1.0}, {1.0f, 1.0f, 1.0f}}*/
+		//{{1.0, 1.0, -1.0}, {0.0f, 0.0f, 0.0f}},
+		//{{1.0,  -1.0, -1.0}, {1.0f, 0.0f, 0.0f}},
+		//{{1.0,  1.0,  1.0}, {0.0f, 1.0f, 0.0f}},
+		//{{1.0,  -1.0, 1.0}, {1.0f, 1.0f, 0.0f}},
+		//{{-1.0, 1.0,  -1.0}, {0.0f, 0.0f, 1.0f}},
+		//{{-1.0, -1.0, -1.0}, {1.0f, 0.0f, 1.0f}},
+		//{{-1.0, 1.0,  1.0}, {0.0f, 1.0f, 1.0f}},
+		//{{-1.0, -1.0, 1.0}, {1.0f, 1.0f, 1.0f}}
 		};
 
 		std::vector<uint16_t> indices = {

@@ -139,6 +139,8 @@
     <ClCompile Include="src\Clever\WorldManager\GameObject.cpp" />
     <ClCompile Include="src\Clever\Camera\Camera.cpp" />
     <ClCompile Include="src\Clever\Entry\Clever.cpp" />
+    <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.cpp" />
+    <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.cpp" />
     <ClCompile Include="src\OS-Dependant\Vulkan\VulkanInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +156,10 @@
     <ClInclude Include="src\Clever\WorldManager\UniformBufferObject.h" />
     <ClInclude Include="src\Clever\WorldManager\Vertex.h" />
     <ClInclude Include="src\Clever\WorldManager\WorldManager.h" />
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.h" />
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\Constants.h" />
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\HelperStructs.h" />
+    <ClInclude Include="src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.h" />
     <ClInclude Include="src\OS-Dependant\Vulkan\PipelineInfo.h" />
     <ClInclude Include="src\OS-Dependant\Vulkan\VulkanInstance.h" />
   </ItemGroup>

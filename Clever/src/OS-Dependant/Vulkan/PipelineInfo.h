@@ -37,16 +37,11 @@ public:
 private:
 	void createPipelineLayout()
 	{
-		std::vector< VkDescriptorSetLayoutBinding> bindingInfos(2);
+		std::vector< VkDescriptorSetLayoutBinding> bindingInfos(1);
 		bindingInfos[0].binding = 0;
 		bindingInfos[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 		bindingInfos[0].descriptorCount = 1;
 		bindingInfos[0].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-
-		bindingInfos[1].binding = 1;
-		bindingInfos[1].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-		bindingInfos[1].descriptorCount = 1;
-		bindingInfos[1].stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
 
 		VkDescriptorSetLayoutCreateInfo desciptorInfo{};
 		desciptorInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -58,13 +53,10 @@ private:
 			std::runtime_error("DesctiptorSetLayout failed to be created!");
 		}
 
-
 		VkPushConstantRange push_constant;
 		push_constant.offset = 0;
 		push_constant.size = sizeof(PushConstants);
 		push_constant.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-
-		instances.resize(100);
 
 		VkPipelineLayoutCreateInfo info{};
 		info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;

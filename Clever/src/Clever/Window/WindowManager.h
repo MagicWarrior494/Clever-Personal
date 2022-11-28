@@ -14,6 +14,7 @@ namespace Window
 			int width;
 			int height;
 			int max_frames_in_flight;
+			bool RTXEnable;
 		};
 
 	private:
@@ -26,7 +27,7 @@ namespace Window
 		void WindowInit(WindowFlags flags = {})
 		{
 			m_Flags = flags;
-			m_VulkanInstance.reset(new VulkanInstance(flags.width, flags.height, flags.max_frames_in_flight));
+			m_VulkanInstance.reset(new VulkanInstance(flags.width, flags.height, flags.max_frames_in_flight, flags.RTXEnable));
 			m_Camera = Camera(45.0f, flags.width, flags.height, 0.1f, 10.0f, glm::vec3(0, 0, 0), m_VulkanInstance->getGLFWwindow());
 		}
 
