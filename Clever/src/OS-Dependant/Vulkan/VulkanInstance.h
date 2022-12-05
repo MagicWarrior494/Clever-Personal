@@ -71,7 +71,7 @@ public:
 	VulkanInstance(int height, int width, int max_frames_in_flight, bool RTXEnable) :
 		m_SwapChainExtent({ static_cast<uint32_t>(height), static_cast<uint32_t>(width) }), m_max_frames_in_flight(max_frames_in_flight)
 	{
-		createInstance(RTXEnable);
+		createInstance();
 		m_Camera = Camera(45.0f, height, width, 0.1f, 1000.0f, glm::vec3(5,-2, 2), m_Window);
 	}
 
@@ -252,7 +252,7 @@ private:
 
 	}
 
-	void createInstance(bool RTXEnable);
+	void createInstance();
 	
 	VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags) {
 		VkImageViewCreateInfo viewInfo{};

@@ -1,6 +1,6 @@
 #include "VulkanInstance.h"
 
-void VulkanInstance::createInstance(bool RTXEnable)
+void VulkanInstance::createInstance()
 {
 	{
 		glfwInit();
