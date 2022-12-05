@@ -19,7 +19,7 @@ Color: Color of Material, v0.1(Will be replaced with procedurally created textur
 Properties: Real world material properties, v0.2
 	Reflectiveness
 	Roughness
-	Density
+	Densitya
 	(Need to do more research on what propeties a material has)
 
 MagicStructure: Same as properties but with Magic, entirly our Creation and design, v0.?
