@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{066304AC-F204-2F82-DBBF-42D6C700B6D2}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Clever</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86_64\Clever\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\Clever\</IntDir>
+    <TargetName>Clever</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86_64\Clever\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\Clever\</IntDir>
+    <TargetName>Clever</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Dist-windows-x86_64\Clever\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\Clever\</IntDir>
+    <TargetName>Clever</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>Clever\src;vender\GLFW\include;vender\vulkan\Include;vender\glm\include;vender\rapidjson\include;vender\stb_image\include;vender\tinyobjloader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>vender\vulkan\Lib\vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>Clever\src;vender\GLFW\include;vender\vulkan\Include;vender\glm\include;vender\rapidjson\include;vender\stb_image\include;vender\tinyobjloader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>vender\vulkan\Lib\vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>Clever\src;vender\GLFW\include;vender\vulkan\Include;vender\glm\include;vender\rapidjson\include;vender\stb_image\include;vender\tinyobjloader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>vender\vulkan\Lib\vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Clever\src\Clever\Camera\Camera.h" />
+    <ClInclude Include="Clever\src\Clever\Material\MaterialManager.h" />
+    <ClInclude Include="Clever\src\Clever\Window\WindowManager.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\Component\Component.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\Component\Renderable.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\ComponentArray.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\ComponentManager.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\MeshData.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Object\GameObject.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Object\ObjectManager.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\UniformBufferObject.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\Vertex.h" />
+    <ClInclude Include="Clever\src\Clever\WorldManager\WorldManager.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imconfig.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_glfw.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_vulkan.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_internal.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_rectpack.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_textedit.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_truetype.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\Constants.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperStructs.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\PipelineInfo.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\VulkanInstance.h" />
+    <ClInclude Include="vender\rapidjson\example\archiver\archiver.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\allocators.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\cursorstreamwrapper.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\document.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\encodedstream.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\encodings.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\error\en.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\error\error.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\filereadstream.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\filewritestream.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\fwd.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\biginteger.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\clzll.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\diyfp.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\dtoa.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\ieee754.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\itoa.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\meta.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\pow10.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\regex.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\stack.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\strfunc.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\strtod.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\swap.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\istreamwrapper.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\memorybuffer.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\memorystream.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\msinttypes\inttypes.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\msinttypes\stdint.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\ostreamwrapper.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\pointer.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\prettywriter.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\rapidjson.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\reader.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\schema.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\stream.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\stringbuffer.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\uri.h" />
+    <ClInclude Include="vender\rapidjson\include\rapidjson\writer.h" />
+    <ClInclude Include="vender\rapidjson\test\perftest\perftest.h" />
+    <ClInclude Include="vender\rapidjson\test\unittest\unittest.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-actions.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-cardinalities.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-actions.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-function-mockers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-matchers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-nice-strict.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-matchers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-more-actions.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-more-matchers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-spec-builders.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-generated-actions.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-matchers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-port.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-generated-internal-utils.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-internal-utils.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-port.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\test\gmock_link_test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-death-test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-message.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-param-test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-printers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-spi.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-test-part.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-typed-test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest_pred_impl.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest_prod.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest-port.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest-printers.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-death-test-internal.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-filepath.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-internal.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-linked_ptr.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-param-util-generated.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-param-util.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-port-arch.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-port.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-string.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-tuple.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-type-util.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\prime_tables.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample1.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample2.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample3-inl.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample4.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\src\gtest-internal-inl.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\gtest-param-test_test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\gtest-typed-test_test.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\production.h" />
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\xcode\Samples\FrameworkSample\widget.h" />
+    <ClInclude Include="vender\stb_image\include\stb_image.h" />
+    <ClInclude Include="vender\tinyobjloader\include\tiny_obj_loader.h" />
+    <ClInclude Include="vender\vulkan\vulkan.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Clever\src\Clever\Camera\Camera.cpp" />
+    <ClCompile Include="Clever\src\Clever\Entry\Clever.cpp" />
+    <ClCompile Include="Clever\src\Clever\WorldManager\Components\ComponentManager.cpp" />
+    <ClCompile Include="Clever\src\Clever\WorldManager\Object\GameObject.cpp" />
+    <ClCompile Include="Clever\src\Clever\WorldManager\Object\ObjectManager.cpp" />
+    <ClCompile Include="Clever\src\Clever\WorldManager\WorldManager.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_demo.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_draw.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_vulkan.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_widgets.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.cpp" />
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\VulkanInstance.cpp" />
+    <ClCompile Include="vender\imgui\imgui_tables.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vender\GLFW\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

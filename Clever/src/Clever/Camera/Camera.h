@@ -1,6 +1,6 @@
 #pragma once
-#include <glm/glm.hpp>
-#include <glm/gtx/transform.hpp>
+#include <glm.hpp>
+#include <gtx/transform.hpp>
 #include <array>
 #include <iostream>
 #include <GLFW/glfw3.h>
@@ -76,7 +76,7 @@ private:
 	glm::vec3 m_Velocity = { 0,0,0 };
 	glm::vec3 m_Front = { 0.0f, 0.0f, -1.0f };
 	glm::vec3 m_Right = { -1, 0, 0 };
-	float m_CameraSpeed = 1.0f * 0.001;
+	float m_CameraSpeed = 1000.0f;
 
 	float Yaw = -90.0f;
 	float Pitch = 0.0f;

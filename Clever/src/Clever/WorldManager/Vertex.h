@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/glm.hpp>
+#include <glm.hpp>
 #include <vulkan/vulkan.h>
 #include <array>
 
@@ -10,6 +10,11 @@ struct Vertex
 
 	Vertex(glm::vec3 poss, glm::vec3 colors)
 		: color(colors), pos(poss)
+	{
+
+	}
+
+	Vertex()
 	{
 
 	}

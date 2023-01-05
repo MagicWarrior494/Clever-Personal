@@ -95,7 +95,7 @@ void VulkanInstance::createInstance()
 			swapchainCreateInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
 			swapchainCreateInfo.surface = m_Surface;
 			swapchainCreateInfo.minImageCount = swapChainSupport.capabilities.minImageCount + 1;
-			swapchainCreateInfo.imageFormat = VK_FORMAT_B8G8R8A8_SRGB;
+			swapchainCreateInfo.imageFormat = VK_FORMAT_B8G8R8A8_UNORM;
 			swapchainCreateInfo.imageColorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
 			swapchainCreateInfo.imageExtent = m_SwapChainExtent;
 			swapchainCreateInfo.imageArrayLayers = 1;
@@ -144,7 +144,7 @@ void VulkanInstance::createInstance()
 				createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
 				createInfo.image = m_SwapChainImages[i];
 				createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-				createInfo.format = VK_FORMAT_B8G8R8A8_SRGB;
+				createInfo.format = VK_FORMAT_B8G8R8A8_UNORM;
 				createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
 				createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
 				createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
@@ -166,7 +166,7 @@ void VulkanInstance::createInstance()
 		//! Creating Renderpass
 		{
 			VkAttachmentDescription colorAttachment{};
-			colorAttachment.format = VK_FORMAT_B8G8R8A8_SRGB;
+			colorAttachment.format = VK_FORMAT_B8G8R8A8_UNORM;
 			colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
 			colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 			colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;

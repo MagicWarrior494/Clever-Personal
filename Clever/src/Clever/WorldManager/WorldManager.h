@@ -1,5 +1,7 @@
 #pragma once
 #include "Components/ComponentManager.h"
+#include "OS-Dependant/Vulkan/VulkanInstance.h"
+#include "Object/ObjectManager.h"
 #include <iostream>
 #include <string>
 
@@ -40,35 +42,24 @@ namespace World
 
 			}
 
-			//! Temporary Code to generating A single Cube
+			Renderable loadedObject{ vulkanInstance->m_Device, vulkanInstance->m_PhysicalDevice, vulkanInstance->m_RenderPass, vulkanInstance->m_CommandPool, vulkanInstance->m_GraphicsQueue, vulkanInstance->m_UniformBuffers, vulkanInstance->m_max_frames_in_flight };
+
 			{
+				int count = 25;
+				std::pair<std::vector<Vertex>, std::vector<uint16_t>> md = loadModel("D:/Clever-Personal/Clever/Clever/Resource/Models/Teapot.obj");
+
 				componentManager.AddEntity();
-				Renderable rend{ vulkanInstance->m_Device, vulkanInstance->m_PhysicalDevice, vulkanInstance->m_RenderPass, vulkanInstance->m_CommandPool, vulkanInstance->m_GraphicsQueue, vulkanInstance->m_UniformBuffers, vulkanInstance->m_max_frames_in_flight };
-				
+				loadedObject.setComponentData(md);
+				loadedObject.setInstanceCount(count);
 
+				for (int i = 0; i < count; i++)
+				{
+					loadedObject.setLocation({ (i % 5), 0, (i / 5)}, i);
+				}
 
-				Vertex vertex(glm::vec3(1, 1, 0), glm::vec3(0,0,1));
-				Vertex vertex1(glm::vec3(-1, 1, 0), glm::vec3(0,1,0));
-				Vertex vertex2(glm::vec3(1, -1, 0), glm::vec3(1,0,0));
-				Vertex vertex3(glm::vec3(-1, -1, 0), glm::vec3(0,1,1));
-				
-				vertices.push_back(vertex);
-				vertices.push_back(vertex1);
-				vertices.push_back(vertex2);
-				vertices.push_back(vertex3);
-
-				indices.push_back(0);
-				indices.push_back(1);
-				indices.push_back(2);
-				indices.push_back(3);
-				indices.push_back(2);
-				indices.push_back(1);
-
-
-				rend.setComponentData(vertices, indices);
-				componentManager.changeEntityComponent(0, rend);
+				componentManager.changeEntityComponent(0, loadedObject);
+				//componentManager.changeEntityComponent(1, loadedObject);
 				//Creating a Renderable Object with needed data for a Cube
-
 			}
 		}
 
@@ -80,6 +71,11 @@ namespace World
 		int getRenderablesSize()
 		{
 			return componentManager.getComponentArraySize<Renderable>();
+		}
+
+		void cleanup()
+		{
+			
 		}
 
 	private:

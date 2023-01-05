@@ -108,12 +108,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\Clever-Personal\Libraries\glm;D:\Clever-Personal\Libraries\Image\include;D:\Clever-Personal\Libraries\glfw\include;C:\VulkanSDK\1.3.231.1\Include;D:\Clever-Personal\Libraries\Model;D:\Clever-Personal\Libraries\Json\rapidjson\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libraries\glm;$(SolutionDir)..\Libraries\Image\include;$(SolutionDir)..\Libraries\glfw\include;C:\VulkanSDK\1.3.231.1\Include;$(SolutionDir)..\Libraries\Model;$(SolutionDir)..\Libraries\Json\rapidjson\include;$(SolutionDir)..\Libraries\ImGui\Include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Clever-Personal\Libraries\glfw\lib-vc2022;C:\VulkanSDK\1.3.231.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\glfw\lib-vc2022;C:\VulkanSDK\1.3.231.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -126,22 +126,24 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\Clever-Personal\Libraries\glm;D:\Clever-Personal\Libraries\Image\include;D:\Clever-Personal\Libraries\glfw\include;C:\VulkanSDK\1.3.231.1\Include;D:\Clever-Personal\Libraries\Model;D:\Clever-Personal\Libraries\Json\rapidjson\include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libraries\glm;$(SolutionDir)..\Libraries\Image\include;$(SolutionDir)..\Libraries\glfw\include;C:\VulkanSDK\1.3.231.1\Include;$(SolutionDir)..\Libraries\Model;$(SolutionDir)..\Libraries\Json\rapidjson\include;$(SolutionDir)..\Libraries\ImGui\Include;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Clever-Personal\Libraries\glfw\lib-vc2022;C:\VulkanSDK\1.3.231.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\glfw\lib-vc2022;C:\VulkanSDK\1.3.231.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Clever\WorldManager\Components\ComponentManager.cpp" />
-    <ClCompile Include="src\Clever\WorldManager\GameObject.cpp" />
+    <ClCompile Include="src\Clever\WorldManager\Object\GameObject.cpp" />
     <ClCompile Include="src\Clever\Camera\Camera.cpp" />
     <ClCompile Include="src\Clever\Entry\Clever.cpp" />
+    <ClCompile Include="src\Clever\WorldManager\Object\ObjectManager.cpp" />
+    <ClCompile Include="src\Clever\WorldManager\WorldManager.cpp" />
     <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.cpp" />
     <ClCompile Include="src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.cpp" />
     <ClCompile Include="src\OS-Dependant\Vulkan\VulkanInstance.cpp" />
@@ -151,11 +153,12 @@
     <ClInclude Include="src\Clever\WorldManager\Components\ComponentManager.h" />
     <ClInclude Include="src\Clever\WorldManager\Components\Component\Component.h" />
     <ClInclude Include="src\Clever\WorldManager\Components\Component\Renderable.h" />
-    <ClInclude Include="src\Clever\WorldManager\GameObject.h" />
+    <ClInclude Include="src\Clever\WorldManager\Object\GameObject.h" />
     <ClInclude Include="src\Clever\Camera\Camera.h" />
     <ClInclude Include="src\Clever\Material\MaterialManager.h" />
     <ClInclude Include="src\Clever\Window\WindowManager.h" />
     <ClInclude Include="src\Clever\WorldManager\MeshData.h" />
+    <ClInclude Include="src\Clever\WorldManager\Object\ObjectManager.h" />
     <ClInclude Include="src\Clever\WorldManager\UniformBufferObject.h" />
     <ClInclude Include="src\Clever\WorldManager\Vertex.h" />
     <ClInclude Include="src\Clever\WorldManager\WorldManager.h" />

@@ -1,7 +1,7 @@
 #pragma once
 #include <fstream>
 #include <iostream>
-#include <glm/glm.hpp>
+#include <glm.hpp>
 
 #include "rapidjson/document.h"
 #include <rapidjson/istreamwrapper.h>

@@ -25,6 +25,27 @@ struct Renderable : Component
 		meshData.createVertexBuffer(vertices);
 		meshData.createIndexBuffer(indices);
 	}
+	void setComponentData(std::pair<std::vector<Vertex>, std::vector<uint16_t>> data)
+	{
+		meshData.createVertexBuffer(data.first);
+		meshData.createIndexBuffer(data.second);
+	}
+	
+	void setInstanceCount(int count)
+	{
+		pipelineInfo.setInstanceCount(count);
+	}
+
+	void setLocation(glm::vec3 pos, int instance)
+	{
+		pipelineInfo.setPosition(pos, instance);
+	}
+
+	void destory()
+	{
+		meshData.cleanup();
+		pipelineInfo.cleanup();
+	}
 
 	virtual std::string toString() override
 	{

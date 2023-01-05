@@ -9,10 +9,11 @@ int main()
     //TODO -----------Desired Code----------------
     //    
     Window::WindowManager window{};
-    window.WindowInit({1024, 576, 2});
+    window.WindowInit({1440, 810, 2});
     //!        IE:
     //            Raytracing/Rasterizing
     //            Window Size
+    //            Fullscreen
     //            VR/monitor
     //            Debug Mode on or off(Editor mode) Might have different levels
     //            etc
@@ -23,7 +24,7 @@ int main()
     //             After this call a screen opens and can view into "The world"
     //
     Material::MaterialManager materials{};
-    materials.MaterialInit({"Resource/Materials/stone.json"});
+    materials.MaterialInit({"Clever/Resource/Materials/stone.json"});
     //!        IE:
     //            File location of material types and material properties, and how they mix together
     //!        Usage:
@@ -72,4 +73,8 @@ int main()
     //!        Usage:
     //              This updates the magic System and Phyisics system and others over all data.
             }
+
+            window.cleanup(world.getRenderables(), world.getRenderablesSize());
+            world.cleanup();
+            
 }

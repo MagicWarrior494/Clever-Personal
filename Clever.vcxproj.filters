@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Clever">
+      <UniqueIdentifier>{066304AC-F204-2F82-DBBF-42D6C700B6D2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src">
+      <UniqueIdentifier>{1D34060E-09EC-475B-72F3-20B75ECAE24B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever">
+      <UniqueIdentifier>{2D570F34-996D-0DCA-E2E4-98EB4E3ADE51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\Camera">
+      <UniqueIdentifier>{05776DD9-F19B-BC59-1AE7-A1E9066BBB77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\Entry">
+      <UniqueIdentifier>{8EA3B2C8-FADA-FA5F-03E5-5E836F9B2159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\Material">
+      <UniqueIdentifier>{6BE88D35-57F8-3906-C0B1-9E24ACE0289F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\Window">
+      <UniqueIdentifier>{74EFA508-6014-F588-895F-DA1875E3F3A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\WorldManager">
+      <UniqueIdentifier>{FF851AA7-EBAB-E40D-D4F1-69D9C0B609DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\WorldManager\Components">
+      <UniqueIdentifier>{B44DF451-2068-57F3-698A-6787D5E37EFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\WorldManager\Components\Component">
+      <UniqueIdentifier>{16D79979-82E8-4120-0B3A-D45F774ACB59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\Clever\WorldManager\Object">
+      <UniqueIdentifier>{A5DE67D0-11A3-66C0-DA08-978A468C02F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\OS-Dependant">
+      <UniqueIdentifier>{4EB75152-BAEE-99E9-C3F8-FD0C2FAFC0E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\OS-Dependant\ImGui">
+      <UniqueIdentifier>{F8EEC5D3-6407-ADFD-2DB4-3C97998B4197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc">
+      <UniqueIdentifier>{0A13D7D4-F664-AEC4-DF83-EBD4CB74C7AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\OS-Dependant\Vulkan">
+      <UniqueIdentifier>{0EC17B6B-FAE6-45D2-E32C-CB9DCFF16A9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clever\src\OS-Dependant\Vulkan\Initilizers">
+      <UniqueIdentifier>{F3841FA5-DFEC-E572-4858-FA8834DFFC5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender">
+      <UniqueIdentifier>{69728122-5514-ACF8-3ECF-BF4C2A103349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson">
+      <UniqueIdentifier>{62D380BF-4ECC-9F11-77FE-849663567F1D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\example">
+      <UniqueIdentifier>{3D271B46-294C-6AC6-5297-4F563E1B69E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\example\archiver">
+      <UniqueIdentifier>{2054D904-8CC2-2E84-D5AB-E98341592420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\include">
+      <UniqueIdentifier>{D53CD462-C161-23E3-EAAC-0873D6302201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\include\rapidjson">
+      <UniqueIdentifier>{CE947478-BAD0-77E2-23E3-8FD90F3E20FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\include\rapidjson\error">
+      <UniqueIdentifier>{A70EF710-938B-EA53-BC08-EB67A8E486E7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\include\rapidjson\internal">
+      <UniqueIdentifier>{DA7EB50A-46E4-4891-CFBC-EA693B213E00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\include\rapidjson\msinttypes">
+      <UniqueIdentifier>{DD3FC577-49B0-C7F0-12CF-41797EFEFFF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\test">
+      <UniqueIdentifier>{31192A88-9D85-E582-6679-7DE0D2A407EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\test\perftest">
+      <UniqueIdentifier>{0D0E5F55-F933-29BC-E279-AE87CE3E4E88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\test\unittest">
+      <UniqueIdentifier>{A0427393-8C68-3DFA-75AE-C2C5617362C6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty">
+      <UniqueIdentifier>{1CBFD225-88CC-000C-11B3-FCF67DBFCCC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest">
+      <UniqueIdentifier>{724E304F-DEBC-85CE-27A6-40CE93537B6A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock">
+      <UniqueIdentifier>{8806C66E-7419-C6C7-1D03-A3B409F56215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock\include">
+      <UniqueIdentifier>{FB35159C-E774-BF17-90F7-9B497C157582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock">
+      <UniqueIdentifier>{5B82EA54-4742-7BF9-B05F-63049C3E8E0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal">
+      <UniqueIdentifier>{07FBF7BC-7364-8D1F-FCA7-3BCA68103E64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom">
+      <UniqueIdentifier>{918902B4-7DA1-0D69-E670-ED2DD2A7F09B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googlemock\test">
+      <UniqueIdentifier>{17344BDA-83FA-A7F6-CC55-3659385B165B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest">
+      <UniqueIdentifier>{BEB4C96E-AAC7-C9C7-53B1-A6B43FA36615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\include">
+      <UniqueIdentifier>{31BA2616-1DF9-D091-C67B-ADC3B29986FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest">
+      <UniqueIdentifier>{4785DB9B-3345-6C40-9C62-544B88417F52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal">
+      <UniqueIdentifier>{7307E931-DF70-7E94-68B4-2C3FD41C2FD9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom">
+      <UniqueIdentifier>{7DE493D1-69FC-9E86-D2CB-7E4BBE0282B9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\samples">
+      <UniqueIdentifier>{020A51FA-EE48-FB75-97CB-D7A783E9B0E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\src">
+      <UniqueIdentifier>{D5A10D72-C14A-75A1-EAE0-9020D6E88FE2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\test">
+      <UniqueIdentifier>{0D34C2B3-79FA-1ED0-C255-AD322E5B8D34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\xcode">
+      <UniqueIdentifier>{40EC4F2C-2C80-45D4-9544-9F8881F77FC6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\xcode\Samples">
+      <UniqueIdentifier>{640B0822-50CB-98C6-B9E8-80D1A5C7ABD8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\rapidjson\thirdparty\gtest\googletest\xcode\Samples\FrameworkSample">
+      <UniqueIdentifier>{C39E6E47-AFB6-79FC-1886-59C104BD5C2F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\stb_image">
+      <UniqueIdentifier>{43FA3870-2FF3-57C2-5825-3D47447D37CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\stb_image\include">
+      <UniqueIdentifier>{B6B4B125-A2D9-00A6-CB24-E635B7A8FFC3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\tinyobjloader">
+      <UniqueIdentifier>{6EF1AFB0-5A80-397A-039F-4D75EF0C4A20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\tinyobjloader\include">
+      <UniqueIdentifier>{E1A6161E-CD61-06CA-7619-7F1462B3505A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\vulkan">
+      <UniqueIdentifier>{E9A3E19C-5564-5DD3-1E9F-A6508A1EA2AF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Clever\src\Clever\Camera\Camera.h">
+      <Filter>Clever\src\Clever\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\Material\MaterialManager.h">
+      <Filter>Clever\src\Clever\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\Window\WindowManager.h">
+      <Filter>Clever\src\Clever\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\Component\Component.h">
+      <Filter>Clever\src\Clever\WorldManager\Components\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\Component\Renderable.h">
+      <Filter>Clever\src\Clever\WorldManager\Components\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\ComponentArray.h">
+      <Filter>Clever\src\Clever\WorldManager\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Components\ComponentManager.h">
+      <Filter>Clever\src\Clever\WorldManager\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\MeshData.h">
+      <Filter>Clever\src\Clever\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Object\GameObject.h">
+      <Filter>Clever\src\Clever\WorldManager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Object\ObjectManager.h">
+      <Filter>Clever\src\Clever\WorldManager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\UniformBufferObject.h">
+      <Filter>Clever\src\Clever\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\Vertex.h">
+      <Filter>Clever\src\Clever\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\Clever\WorldManager\WorldManager.h">
+      <Filter>Clever\src\Clever\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.h">
+      <Filter>Clever\src\OS-Dependant\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imconfig.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_glfw.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_vulkan.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_internal.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_rectpack.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_textedit.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imstb_truetype.h">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\Constants.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperStructs.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\PipelineInfo.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="Clever\src\OS-Dependant\Vulkan\VulkanInstance.h">
+      <Filter>Clever\src\OS-Dependant\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\example\archiver\archiver.h">
+      <Filter>vender\rapidjson\example\archiver</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\allocators.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\cursorstreamwrapper.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\document.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\encodedstream.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\encodings.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\error\en.h">
+      <Filter>vender\rapidjson\include\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\error\error.h">
+      <Filter>vender\rapidjson\include\rapidjson\error</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\filereadstream.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\filewritestream.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\fwd.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\biginteger.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\clzll.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\diyfp.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\dtoa.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\ieee754.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\itoa.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\meta.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\pow10.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\regex.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\stack.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\strfunc.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\strtod.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\internal\swap.h">
+      <Filter>vender\rapidjson\include\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\istreamwrapper.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\memorybuffer.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\memorystream.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\msinttypes\inttypes.h">
+      <Filter>vender\rapidjson\include\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\msinttypes\stdint.h">
+      <Filter>vender\rapidjson\include\rapidjson\msinttypes</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\ostreamwrapper.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\pointer.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\prettywriter.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\rapidjson.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\reader.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\schema.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\stream.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\stringbuffer.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\uri.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\include\rapidjson\writer.h">
+      <Filter>vender\rapidjson\include\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\test\perftest\perftest.h">
+      <Filter>vender\rapidjson\test\perftest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\test\unittest\unittest.h">
+      <Filter>vender\rapidjson\test\unittest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-actions.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-cardinalities.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-actions.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-function-mockers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-matchers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-generated-nice-strict.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-matchers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-more-actions.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-more-matchers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock-spec-builders.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\gmock.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-generated-actions.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-matchers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom\gmock-port.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-generated-internal-utils.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-internal-utils.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal\gmock-port.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\include\gmock\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googlemock\test\gmock_link_test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googlemock\test</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-death-test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-message.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-param-test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-printers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-spi.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-test-part.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest-typed-test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest_pred_impl.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\gtest_prod.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest-port.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest-printers.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom\gtest.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\custom</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-death-test-internal.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-filepath.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-internal.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-linked_ptr.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-param-util-generated.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-param-util.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-port-arch.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-port.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-string.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-tuple.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal\gtest-type-util.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\include\gtest\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\prime_tables.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample1.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample2.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample3-inl.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\samples\sample4.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\samples</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\src\gtest-internal-inl.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\src</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\gtest-param-test_test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\test</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\gtest-typed-test_test.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\test</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\test\production.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\test</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\rapidjson\thirdparty\gtest\googletest\xcode\Samples\FrameworkSample\widget.h">
+      <Filter>vender\rapidjson\thirdparty\gtest\googletest\xcode\Samples\FrameworkSample</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\stb_image\include\stb_image.h">
+      <Filter>vender\stb_image\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\tinyobjloader\include\tiny_obj_loader.h">
+      <Filter>vender\tinyobjloader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\vulkan\vulkan.h">
+      <Filter>vender\vulkan</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Clever\src\Clever\Camera\Camera.cpp">
+      <Filter>Clever\src\Clever\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\Clever\Entry\Clever.cpp">
+      <Filter>Clever\src\Clever\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\Clever\WorldManager\Components\ComponentManager.cpp">
+      <Filter>Clever\src\Clever\WorldManager\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\Clever\WorldManager\Object\GameObject.cpp">
+      <Filter>Clever\src\Clever\WorldManager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\Clever\WorldManager\Object\ObjectManager.cpp">
+      <Filter>Clever\src\Clever\WorldManager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\Clever\WorldManager\WorldManager.cpp">
+      <Filter>Clever\src\Clever\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_demo.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_draw.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_glfw.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_vulkan.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_widgets.cpp">
+      <Filter>Clever\src\OS-Dependant\ImGui\ImGuiSrc</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\Initilizers\CommonInitilizers.cpp">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\Initilizers\HelperFunctions.cpp">
+      <Filter>Clever\src\OS-Dependant\Vulkan\Initilizers</Filter>
+    </ClCompile>
+    <ClCompile Include="Clever\src\OS-Dependant\Vulkan\VulkanInstance.cpp">
+      <Filter>Clever\src\OS-Dependant\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="vender\imgui\imgui_tables.cpp" />
+  </ItemGroup>
+</Project>

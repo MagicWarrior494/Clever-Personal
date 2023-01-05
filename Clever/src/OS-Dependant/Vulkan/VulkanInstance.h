@@ -2,8 +2,11 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLFW_INCLUDE_VULKAN
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+
+#include "OS-Dependant/ImGui/ImGuiSrc/imgui.h"
+#include "OS-Dependant/ImGui/ImGuiSrc/imgui_impl_vulkan.h"
 
 #include "Initilizers/CommonInitilizers.h"
 
@@ -32,23 +35,31 @@ private:
 	};
 public:
 
-	~VulkanInstance()
+	void cleanup()
 	{
 		cleanupSwapChain();
-
+		
 		for (size_t i = 0; i < m_max_frames_in_flight; i++)
 		{
 			vkDestroyBuffer(m_Device, m_UniformBuffers[i], nullptr);
 			vkFreeMemory(m_Device, m_UniformBuffersMemory[i], nullptr);
 		}
-
+			
 		for (size_t i = 0; i < m_max_frames_in_flight; i++) {
 			vkDestroySemaphore(m_Device, m_RenderFinishedSemaphores[i], nullptr);
 			vkDestroySemaphore(m_Device, m_ImageAvailableSemaphores[i], nullptr);
 			vkDestroyFence(m_Device, m_InFlightFences[i], nullptr);
 		}
 
+		vkDestroyRenderPass(m_Device, m_RenderPass, nullptr);
+
 		vkDestroyCommandPool(m_Device, m_CommandPool, nullptr);
+
+		vkDestroyDevice(m_Device, nullptr);
+
+		vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
+
+		
 
 		//! Destroys Validation Layers
 		{
@@ -57,10 +68,6 @@ public:
 				func(m_Instance, m_DebugMessenger, nullptr);
 			}
 		}
-
-		vkDestroyDevice(m_Device, nullptr);
-
-		vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
 
 		vkDestroyInstance(m_Instance, nullptr);
 
@@ -80,7 +87,7 @@ public:
 		return m_Window;
 	}
 
-	void render(float time, Renderable* renderStart, uint32_t count)
+	void render(float time, Renderable* renderStart, uint32_t count, uint32_t m_CurrentFrame)
 	{
 		vkWaitForFences(m_Device, 1, &m_InFlightFences[m_CurrentFrame], VK_TRUE, UINT64_MAX);
 
@@ -110,18 +117,26 @@ public:
 		vkResetFences(m_Device, 1, &m_InFlightFences[m_CurrentFrame]);
 
 		vkResetCommandBuffer(m_CommandBuffers[m_CurrentFrame], 0);
-		recordCommandBuffer(imageIndex, renderStart, count);
+
+		
+		ImGui::Render();
+
+		recordCommandBuffer(imageIndex, renderStart, count, m_CurrentFrame);
 
 		VkSubmitInfo submitInfo{};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
 		VkSemaphore waitSemaphores[] = { m_ImageAvailableSemaphores[m_CurrentFrame] };
 		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+
+		std::array<VkCommandBuffer, 1> submitCommandBuffers =
+		{ m_CommandBuffers[m_CurrentFrame] };
+
 		submitInfo.waitSemaphoreCount = 1;
 		submitInfo.pWaitSemaphores = waitSemaphores;
 		submitInfo.pWaitDstStageMask = waitStages;
-		submitInfo.commandBufferCount = 1;
-		submitInfo.pCommandBuffers = &m_CommandBuffers[m_CurrentFrame];
+		submitInfo.commandBufferCount = static_cast<uint32_t>(submitCommandBuffers.size());
+		submitInfo.pCommandBuffers = submitCommandBuffers.data();
 
 		VkSemaphore signalSemaphores[] = { m_RenderFinishedSemaphores[m_CurrentFrame] };
 		submitInfo.signalSemaphoreCount = 1;
@@ -145,6 +160,12 @@ public:
 
 		result = vkQueuePresentKHR(m_PresentQueue, &presentInfo);
 
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
+
 		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || m_FramebufferResized) {
 			m_FramebufferResized = false;
 			//recreateSwapChain();
@@ -152,8 +173,6 @@ public:
 		else if (result != VK_SUCCESS) {
 			throw std::runtime_error("failed to present swap chain image!");
 		}
-
-		m_CurrentFrame = (m_CurrentFrame + 1) % m_max_frames_in_flight;
 	}
 
 	bool shouldClose()
@@ -163,6 +182,10 @@ public:
 
 private:
 	void cleanupSwapChain() {
+		vkDestroyImageView(m_Device, depthImageView, nullptr);
+		vkDestroyImage(m_Device, depthImage, nullptr);
+		vkFreeMemory(m_Device, depthImageMemory, nullptr);
+
 		for (auto framebuffer : m_FrameBuffers) {
 			vkDestroyFramebuffer(m_Device, framebuffer, nullptr);
 		}
@@ -174,7 +197,7 @@ private:
 		vkDestroySwapchainKHR(m_Device, m_SwapChain, nullptr);
 	}
 
-	void recordCommandBuffer(uint32_t imageIndex, Renderable* renderStart, uint32_t count)
+	void recordCommandBuffer(uint32_t imageIndex, Renderable* renderStart, uint32_t count, uint32_t m_CurrentFrame)
 	{
 		VkCommandBufferBeginInfo beginInfo{};
 		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
@@ -185,7 +208,7 @@ private:
 		}
 
 		std::array<VkClearValue, 2> clearValues{};
-		clearValues[0].color = { {0.0f, 0.0f, 0.0f, 1.0f} };
+		clearValues[0].color = m_ClearValue.color;
 		clearValues[1].depthStencil = { 1.0f, 0 };
 
 		VkRenderPassBeginInfo renderPassInfo{};
@@ -212,9 +235,10 @@ private:
 		vkCmdSetScissor(m_CommandBuffers[m_CurrentFrame], 0, 1, &scissor);
 
 		vkCmdBeginRenderPass(m_CommandBuffers[m_CurrentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
 		for(uint32_t i = 0; i < count; i++)
 		{
-			Renderable* renderData = (renderStart + (sizeof(Renderable) * i));
+			Renderable* renderData = (renderStart + (int)i);
 			VkBuffer vertexBuffers[] = { renderData->meshData.vertexBuffer };
 			VkDeviceSize offsets[] = { 0 };
 			vkCmdBindPipeline(m_CommandBuffers[m_CurrentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, renderData->pipelineInfo.graphicsPipeline);
@@ -225,13 +249,15 @@ private:
 
 			vkCmdBindDescriptorSets(m_CommandBuffers[m_CurrentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, renderData->pipelineInfo.pipelineLayout, 0, 1, &renderData->pipelineInfo.descriptorSets[m_CurrentFrame], 0, nullptr);
 
-			for (int i = 0; i < renderData->pipelineInfo.instances.size(); i++)
+			for (int x = 0; x < renderData->pipelineInfo.instances.size(); x++)
 			{
-				vkCmdPushConstants(m_CommandBuffers[m_CurrentFrame], renderData->pipelineInfo.pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(renderData->pipelineInfo.instances[i]), &renderData->pipelineInfo.instances[i]);
+				vkCmdPushConstants(m_CommandBuffers[m_CurrentFrame], renderData->pipelineInfo.pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(renderData->pipelineInfo.instances[x]), &renderData->pipelineInfo.instances[x]);
 
 				vkCmdDrawIndexed(m_CommandBuffers[m_CurrentFrame], static_cast<uint32_t>(renderData->meshData.getIndexCount()), 1, 0, 0, 0);
 			}
 		}
+
+		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffers[m_CurrentFrame]);
 
 		vkCmdEndRenderPass(m_CommandBuffers[m_CurrentFrame]);
 
@@ -253,7 +279,7 @@ private:
 	}
 
 	void createInstance();
-	
+
 	VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags) {
 		VkImageViewCreateInfo viewInfo{};
 		viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
@@ -452,6 +478,9 @@ private:
 
 		vkBindBufferMemory(m_Device, buffer, bufferMemory, 0);
 	}
+	
+	public:
+	
 	VkCommandBuffer beginSingleTimeCommands() {
 		VkCommandBufferAllocateInfo allocInfo{};
 		allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -537,9 +566,9 @@ public:
 	std::vector<VkSemaphore> m_RenderFinishedSemaphores;
 	std::vector<VkFence> m_InFlightFences;
 
-	uint32_t m_CurrentFrame = 0;
-
 	Helper::QueueFamilyIndicies queueFamilyIndicies;
+
+	VkClearValue m_ClearValue = { 0.0f, 0.0f, 0.0f, 1.0f };
 
 	int m_max_frames_in_flight;
 

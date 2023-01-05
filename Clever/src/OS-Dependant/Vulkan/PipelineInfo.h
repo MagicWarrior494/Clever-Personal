@@ -5,8 +5,8 @@
 #include <fstream>
 #include <vector>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 
 struct PushConstants {
 	glm::mat4 model;
@@ -31,6 +31,29 @@ public:
 	}
 	~PipelineInfo()
 	{
+
+	}
+
+	void setInstanceCount(int count)
+	{
+		positions.resize(count);
+	}
+
+	void setPosition(glm::vec3 pos, int instance)
+	{
+		if (positions.size() < instance)
+			return;
+
+		positions.at(instance) = pos;
+		createPushConstants();
+	}
+
+	void cleanup()
+	{
+		vkDestroyDescriptorSetLayout(m_Device, descriptorSetLayout, nullptr);
+		vkDestroyDescriptorPool(m_Device, descriptorPool, nullptr);
+		vkDestroyPipelineLayout(m_Device, pipelineLayout, nullptr);
+		vkDestroyPipeline(m_Device, graphicsPipeline, nullptr);
 
 	}
 
@@ -73,8 +96,8 @@ private:
 
 	void createGraphicsPipeline()
 	{
-		auto vertShaderCode = readFile("src/OS-Dependant/Shaders/vert.spv");
-		auto fragShaderCode = readFile("src/OS-Dependant/Shaders/frag.spv");
+		auto vertShaderCode = readFile("Clever/src/OS-Dependant/Shaders/vert.spv");
+		auto fragShaderCode = readFile("Clever/src/OS-Dependant/Shaders/frag.spv");
 
 		VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
 		VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
@@ -249,17 +272,16 @@ private:
 		push_constant.offset = 0;
 		push_constant.size = sizeof(PushConstants);
 		push_constant.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-
-		instances.resize(1);
+		instances.clear();
+		instances.resize(positions.size());
 
 		for (int i = 0; i < instances.size(); i++)
 		{
 			PushConstants push = {};
-			push.model = glm::translate(glm::mat4(1.0f), glm::vec3(((i % 10) * 5), ((i / 10) * 5), 0));
+			push.model = glm::translate(glm::mat4(1.0f), positions.at(i));
 			instances[i] = push;
 		}
 	}
-
 
 private:
 	std::vector<char> readFile(const std::string& filename)
@@ -303,6 +325,8 @@ private:
 	VkRenderPass m_RenderPass;
 	std::vector<VkBuffer> m_UniformBuffers;
 	int m_MaxFramesInFlight;
+
+	std::vector<glm::vec3> positions;
 
 public:
 	VkPipeline graphicsPipeline;//

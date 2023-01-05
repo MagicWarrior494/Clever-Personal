@@ -15,7 +15,7 @@ public:
 	}
 	~MeshData()
 	{
-
+		
 	}
 
 	int getIndexCount()
@@ -65,6 +65,15 @@ public:
 
 		vkDestroyBuffer(m_Device, stagingBuffer, nullptr);
 		vkFreeMemory(m_Device, stagingBufferMemory, nullptr);
+	}
+
+	void cleanup()
+	{
+
+			vkDestroyBuffer(m_Device, vertexBuffer, nullptr);
+			vkFreeMemory(m_Device, m_VertexBufferMemory, nullptr);
+			vkDestroyBuffer(m_Device, indexBuffer, nullptr);
+			vkFreeMemory(m_Device, m_IndexBufferMemory, nullptr);
 	}
 
 private:
