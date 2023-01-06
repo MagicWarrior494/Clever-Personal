@@ -130,11 +130,11 @@ void VulkanInstance::createInstance()
 
 		//! Creating ImageViews
 		{
-			uint32_t imageCount;
-			vkGetSwapchainImagesKHR(m_Device, m_SwapChain, &imageCount, nullptr);
-			m_SwapChainImages.resize(imageCount);
-			m_ImageViews.resize(imageCount);
-			vkGetSwapchainImagesKHR(m_Device, m_SwapChain, &imageCount, m_SwapChainImages.data());
+			
+			vkGetSwapchainImagesKHR(m_Device, m_SwapChain, &m_ImageCount, nullptr);
+			m_SwapChainImages.resize(m_ImageCount);
+			m_ImageViews.resize(m_ImageCount);
+			vkGetSwapchainImagesKHR(m_Device, m_SwapChain, &m_ImageCount, m_SwapChainImages.data());
 
 
 			int i = 0;
@@ -254,7 +254,7 @@ void VulkanInstance::createInstance()
 			}
 		}
 
-		//! Creating Commaned Buffers
+		//! Creating Command Buffers
 		{
 			m_CommandBuffers.resize(m_max_frames_in_flight);
 

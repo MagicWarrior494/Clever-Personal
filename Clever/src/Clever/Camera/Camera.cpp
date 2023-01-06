@@ -6,6 +6,7 @@ Camera::Camera(float fov, float width, float height, float fnear, float ffar, gl
 	m_ProjectionMatrix[1][1] *= -1;
 	RecaluclateViewMatrix();
 	glfwSetCursorPos(m_Window, m_LastX, m_LastY);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void Camera::update(float time)
@@ -41,6 +42,9 @@ void Camera::update(float time)
 	{
 		m_LockMouse = true;
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPos(window, m_MiddleOfScreen.first, m_MiddleOfScreen.second);
+		m_LastX = m_MiddleOfScreen.first;
+		m_LastY = m_MiddleOfScreen.second;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE))

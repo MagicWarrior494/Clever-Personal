@@ -13,11 +13,11 @@ struct Renderable : Component
 
 	}
 
-	Renderable(VkDevice device, VkPhysicalDevice physicalDevice, VkRenderPass renderPass, VkCommandPool commandPool, VkQueue graphicsQueue, std::vector<VkBuffer>& uniformBuffer, int maxFramesInFlight)
+	Renderable(VkDevice device, VkPhysicalDevice physicalDevice, VkRenderPass renderPass, VkCommandPool commandPool, VkQueue graphicsQueue, std::vector<VkBuffer>& uniformBuffer, int maxFramesInFlight, bool ray = false)
 	{
 		meshData = MeshData(device, physicalDevice, commandPool, graphicsQueue);
-		pipelineInfo = PipelineInfo(device, renderPass, uniformBuffer, maxFramesInFlight);
-
+		pipelineInfo = PipelineInfo(device, renderPass, uniformBuffer, maxFramesInFlight, ray);
+		pipelineInfo.setInstanceCount(1);
 	}
 
 	void setComponentData(std::vector<Vertex> vertices, std::vector<uint16_t> indices)
@@ -36,7 +36,12 @@ struct Renderable : Component
 		pipelineInfo.setInstanceCount(count);
 	}
 
-	void setLocation(glm::vec3 pos, int instance)
+	int getInstanceCount()
+	{
+		return pipelineInfo.getInstanceCount();
+	}
+
+	void setLocation(glm::vec3 pos, int instance = 0)
 	{
 		pipelineInfo.setPosition(pos, instance);
 	}

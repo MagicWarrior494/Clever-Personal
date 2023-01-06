@@ -21,11 +21,11 @@ public:
 	{
 
 	}
-	PipelineInfo(VkDevice device, VkRenderPass renderPass, std::vector<VkBuffer> uniformBuffer, int maxFramesInFlight)
+	PipelineInfo(VkDevice device, VkRenderPass renderPass, std::vector<VkBuffer> uniformBuffer, int maxFramesInFlight, bool ray)
 		: m_Device(device), m_RenderPass(renderPass), m_UniformBuffers(uniformBuffer), m_MaxFramesInFlight(maxFramesInFlight)
 	{
 		createPipelineLayout();
-		createGraphicsPipeline();
+		createGraphicsPipeline(ray);
 		createDesciptor();
 		createPushConstants();
 	}
@@ -46,6 +46,11 @@ public:
 
 		positions.at(instance) = pos;
 		createPushConstants();
+	}
+
+	int getInstanceCount()
+	{
+		return static_cast<int>(positions.size());
 	}
 
 	void cleanup()
@@ -94,7 +99,7 @@ private:
 		}
 	}
 
-	void createGraphicsPipeline()
+	void createGraphicsPipeline(bool ray)
 	{
 		auto vertShaderCode = readFile("Clever/src/OS-Dependant/Shaders/vert.spv");
 		auto fragShaderCode = readFile("Clever/src/OS-Dependant/Shaders/frag.spv");
@@ -141,8 +146,16 @@ private:
 		rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 		rasterizer.depthClampEnable = VK_FALSE;
 		rasterizer.rasterizerDiscardEnable = VK_FALSE;
-		rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
-		rasterizer.lineWidth = 1.0f;
+		if (ray)
+		{
+			rasterizer.polygonMode = VK_POLYGON_MODE_LINE;
+			rasterizer.lineWidth = 4.0f;
+		}
+		else {
+			rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+			rasterizer.lineWidth = 1.0f;
+		}
+		
 		//rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
 		rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 		rasterizer.depthBiasEnable = VK_FALSE;

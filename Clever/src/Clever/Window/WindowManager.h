@@ -3,6 +3,7 @@
 #include "Clever/Camera/Camera.h"
 #include "Clever/WorldManager/Components/Component/Renderable.h"
 #include "OS-Dependant/ImGui/ImGuiManager.h"
+#include "Clever/Developer/DockManager.h"
 #include <memory>
 
 namespace Window
@@ -15,6 +16,7 @@ namespace Window
 			int width;
 			int height;
 			int max_frames_in_flight;
+			bool DeveloperMode;
 			bool RTXEnable;
 		};
 
@@ -28,8 +30,11 @@ namespace Window
 		{
 			m_Flags = flags;
 			m_VulkanInstance.reset(new VulkanInstance(flags.width, flags.height, flags.max_frames_in_flight, flags.RTXEnable));
-			m_ImGuiManager = ImGuiManager();
-			m_ImGuiManager.bind(m_VulkanInstance, m_CurrentFrame);
+			if (m_Flags.DeveloperMode)
+			{
+				m_ImGuiManager = ImGuiManager();
+				m_ImGuiManager.bind(m_VulkanInstance, m_CurrentFrame);
+			}
 			m_Camera = Camera(90.0f, flags.width, flags.height, 0.1f, 10.0f, glm::vec3(0, 0, 0), m_VulkanInstance->getGLFWwindow());
 		}
 
@@ -42,11 +47,22 @@ namespace Window
 			float timeDelta = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - lastTime).count();
 
 			glfwPollEvents();
+			uint32_t imageIndex = -1;
+			VkCommandBuffer ImGuiCommandBuffer = VK_NULL_HANDLE;
+			if (m_Flags.DeveloperMode)
+			{
+				m_ImGuiManager.newFrame();
+				m_ImGuiManager.showDemoWindow();
 
-			m_ImGuiManager.newFrame();
-			m_ImGuiManager.showDemoWindow();
+				DevTools::BuildCustomUI();
 
-			m_VulkanInstance->render(timeDelta, renderableStart, count, m_CurrentFrame);
+				m_ImGuiManager.ImGuiCustomRender();
+
+				imageIndex = m_ImGuiManager.render(m_VulkanInstance, m_CurrentFrame);
+				ImGuiCommandBuffer = m_ImGuiManager.getCommandBuffer(m_CurrentFrame);
+			}
+
+			m_VulkanInstance->render(timeDelta, renderableStart, ImGuiCommandBuffer, count, m_CurrentFrame, imageIndex);
 			frameCounter++;
 			if (time - counter >= 1)
 			{
@@ -72,11 +88,14 @@ namespace Window
 				renderables++;
 			}
 
-			ImGui_ImplVulkan_Shutdown();
-			ImGui_ImplGlfw_Shutdown();
-			ImGui::DestroyContext();
-
-			m_ImGuiManager.cleanup(m_VulkanInstance);
+			if (m_Flags.DeveloperMode)
+			{
+				ImGui_ImplVulkan_Shutdown();
+				ImGui_ImplGlfw_Shutdown();
+				ImGui::DestroyContext();
+				m_ImGuiManager.cleanup(m_VulkanInstance);
+			}
+			
 			m_VulkanInstance->cleanup();
 		}
 

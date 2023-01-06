@@ -121,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Clever\src\Clever\Camera\Camera.h" />
+    <ClInclude Include="Clever\src\Clever\EventSystem\EventManager.h" />
     <ClInclude Include="Clever\src\Clever\Material\MaterialManager.h" />
     <ClInclude Include="Clever\src\Clever\Window\WindowManager.h" />
     <ClInclude Include="Clever\src\Clever\WorldManager\Components\Component\Component.h" />
@@ -133,7 +134,9 @@
     <ClInclude Include="Clever\src\Clever\WorldManager\UniformBufferObject.h" />
     <ClInclude Include="Clever\src\Clever\WorldManager\Vertex.h" />
     <ClInclude Include="Clever\src\Clever\WorldManager\WorldManager.h" />
+    <ClInclude Include="Clever\src\Clever\Developer\DevTools.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.h" />
+    <ClInclude Include="Clever\src\Clever\Developer\DockManager.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imconfig.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imgui_impl_glfw.h" />
@@ -248,6 +251,7 @@
   <ItemGroup>
     <ClCompile Include="Clever\src\Clever\Camera\Camera.cpp" />
     <ClCompile Include="Clever\src\Clever\Entry\Clever.cpp" />
+    <ClCompile Include="Clever\src\Clever\EventSystem\EventManager.cpp" />
     <ClCompile Include="Clever\src\Clever\WorldManager\Components\ComponentManager.cpp" />
     <ClCompile Include="Clever\src\Clever\WorldManager\Object\GameObject.cpp" />
     <ClCompile Include="Clever\src\Clever\WorldManager\Object\ObjectManager.cpp" />

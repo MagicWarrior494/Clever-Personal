@@ -1,7 +1,9 @@
 #pragma once
 #include "Components/ComponentManager.h"
 #include "OS-Dependant/Vulkan/VulkanInstance.h"
+#include "Clever/Window/WindowManager.h"
 #include "Object/ObjectManager.h"
+#include "Clever/Developer/DevTools.h"
 #include <iostream>
 #include <string>
 
@@ -16,9 +18,38 @@ namespace World
 	class WorldManager
 	{
 	public:
+
+		void addRay()
+		{
+			//Window::WindowManager window = Window::WindowManager::getInstance();
+
+			int count = ray.getInstanceCount();
+			ray.setInstanceCount(count + 1);
+			//window.getVulkan()->m_Camera.GetPosition() + 
+			ray.setLocation({ camera->GetPosition() + (camera->GetRotation() * 3.0f)}, count);
+			componentManager.changeEntityComponent(1, ray);
+		}
+
+		Renderable getRay()
+		{
+			return ray;
+		}
+
+		static void worldUI(std::vector<void*> classInstances)
+		{
+			WorldManager* world = (WorldManager*)classInstances.at(0);
+			DevTools::newDock("Entities");
+			DevTools::coloredText(glm::vec3(0.25, 0.76, 0.50), "This is PRetty Cool");
+			if (DevTools::button("AddRay"))
+			{
+				world->addRay();
+			}
+			DevTools::endDock();
+		}
+
 		WorldManager()
 		{
-
+			DevTools::addDockFunction(worldUI, { this,  });
 		}
 		~WorldManager()
 		{
@@ -26,41 +57,37 @@ namespace World
 		}
 		void worldInit(std::shared_ptr<VulkanInstance> vulkanInstance, WorldFlags flags = {})
 		{
-
-			/*
-			------------------STEPS FOR INITIALIZATION-----------------
-				1. Load/Create each object's data
-				2. Load into ECS
-				3. DONE!
-			*/
-
-
+			camera = &vulkanInstance->m_Camera;
 			//Registering All Components before any entities are created
 			{
 
 				componentManager.RegisterComponent<Renderable>();
 
 			}
-
-			Renderable loadedObject{ vulkanInstance->m_Device, vulkanInstance->m_PhysicalDevice, vulkanInstance->m_RenderPass, vulkanInstance->m_CommandPool, vulkanInstance->m_GraphicsQueue, vulkanInstance->m_UniformBuffers, vulkanInstance->m_max_frames_in_flight };
+			ray = { vulkanInstance->m_Device, vulkanInstance->m_PhysicalDevice, vulkanInstance->m_RenderPass, vulkanInstance->m_CommandPool, vulkanInstance->m_GraphicsQueue, vulkanInstance->m_UniformBuffers, vulkanInstance->m_max_frames_in_flight, true };
+			loadedObject = { vulkanInstance->m_Device, vulkanInstance->m_PhysicalDevice, vulkanInstance->m_RenderPass, vulkanInstance->m_CommandPool, vulkanInstance->m_GraphicsQueue, vulkanInstance->m_UniformBuffers, vulkanInstance->m_max_frames_in_flight, false };
 
 			{
-				int count = 25;
-				std::pair<std::vector<Vertex>, std::vector<uint16_t>> md = loadModel("D:/Clever-Personal/Clever/Clever/Resource/Models/Teapot.obj");
+				std::pair<std::vector<Vertex>, std::vector<uint16_t>> teapotModel = loadModel("D:/Clever-Personal/Clever/Clever/Resource/Models/Teapot.obj");
+
+				std::pair<std::vector<Vertex>, std::vector<uint16_t>> rayModel = {vertices, indices };
 
 				componentManager.AddEntity();
-				loadedObject.setComponentData(md);
-				loadedObject.setInstanceCount(count);
+				componentManager.AddEntity();
 
-				for (int i = 0; i < count; i++)
-				{
-					loadedObject.setLocation({ (i % 5), 0, (i / 5)}, i);
-				}
+				loadedObject.setComponentData(teapotModel);
+				loadedObject.setLocation({ 0, 0, 0 });
+
+				ray.setComponentData(rayModel);
+				ray.setLocation({ 2,2,2 });
 
 				componentManager.changeEntityComponent(0, loadedObject);
+				componentManager.changeEntityComponent(1, ray);
 				//componentManager.changeEntityComponent(1, loadedObject);
 				//Creating a Renderable Object with needed data for a Cube
 			}
+
+			//addRay();
 		}
 
 		Renderable* getRenderables()
@@ -81,30 +108,18 @@ namespace World
 	private:
 		ComponentManager componentManager{};
 
+		Renderable ray;
+		Renderable loadedObject;
+
+		Camera* camera;
+
 		std::vector<Vertex> vertices = {
-		//{{1.0, 1.0, -1.0}, {0.0f, 0.0f, 0.0f}},
-		//{{1.0,  -1.0, -1.0}, {1.0f, 0.0f, 0.0f}},
-		//{{1.0,  1.0,  1.0}, {0.0f, 1.0f, 0.0f}},
-		//{{1.0,  -1.0, 1.0}, {1.0f, 1.0f, 0.0f}},
-		//{{-1.0, 1.0,  -1.0}, {0.0f, 0.0f, 1.0f}},
-		//{{-1.0, -1.0, -1.0}, {1.0f, 0.0f, 1.0f}},
-		//{{-1.0, 1.0,  1.0}, {0.0f, 1.0f, 1.0f}},
-		//{{-1.0, -1.0, 1.0}, {1.0f, 1.0f, 1.0f}}
+		{{0.0, -1.0, 0.0}, {0.2f, 0.1f, 0.5f}},
+		{{0.0, 1.0, 0.0}, {0.1f, 0.7f, 0.5f}},
 		};
 
 		std::vector<uint16_t> indices = {
-			/*5, 3, 1,
-			3, 8, 4,
-			7, 6, 8,
-			2, 8, 6,
-			1, 4, 2,
-			5, 2, 6,
-			5, 7, 3,
-			3, 7, 8,
-			7, 5, 6,
-			2, 4, 8,
-			1, 3, 4,
-			5, 1, 2*/
+			0, 1, 0
 		};
 	};
 

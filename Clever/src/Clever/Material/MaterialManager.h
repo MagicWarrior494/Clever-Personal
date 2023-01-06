@@ -48,6 +48,7 @@ namespace Material
 	{
 
 	public:
+
 		void MaterialInit(MaterialFlags materialFlags)
 		{
 			loadMaterial(materialFlags.materialFilePath);

@@ -531,6 +531,9 @@
     <ClInclude Include="vender\vulkan\vulkan.h">
       <Filter>vender\vulkan</Filter>
     </ClInclude>
+    <ClInclude Include="Clever\src\Clever\Developer\DevTools.h" />
+    <ClInclude Include="Clever\src\Clever\Developer\DockManager.h" />
+    <ClInclude Include="Clever\src\Clever\EventSystem\EventManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clever\src\Clever\Camera\Camera.cpp">
@@ -582,5 +585,6 @@
       <Filter>Clever\src\OS-Dependant\Vulkan</Filter>
     </ClCompile>
     <ClCompile Include="vender\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Clever\src\Clever\EventSystem\EventManager.cpp" />
   </ItemGroup>
 </Project>

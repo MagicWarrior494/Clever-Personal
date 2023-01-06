@@ -79,7 +79,7 @@ public:
 		m_SwapChainExtent({ static_cast<uint32_t>(height), static_cast<uint32_t>(width) }), m_max_frames_in_flight(max_frames_in_flight)
 	{
 		createInstance();
-		m_Camera = Camera(45.0f, height, width, 0.1f, 1000.0f, glm::vec3(5,-2, 2), m_Window);
+		m_Camera = Camera(45.0f, height, width, 0.1f, 1000.0f, glm::vec3(3, 1, 8), m_Window);
 	}
 
 	GLFWwindow* getGLFWwindow()
@@ -87,28 +87,28 @@ public:
 		return m_Window;
 	}
 
-	void render(float time, Renderable* renderStart, uint32_t count, uint32_t m_CurrentFrame)
+	void render(float time, Renderable* renderStart, VkCommandBuffer ImGuiCommandBuffer, uint32_t count, uint32_t m_CurrentFrame, uint32_t imageIndex)
 	{
 		vkWaitForFences(m_Device, 1, &m_InFlightFences[m_CurrentFrame], VK_TRUE, UINT64_MAX);
 
-		uint32_t imageIndex;
-
-		VkResult result = vkAcquireNextImageKHR
-		(
-			m_Device,
-			m_SwapChain,
-			UINT64_MAX,
-			m_ImageAvailableSemaphores[m_CurrentFrame],
-			VK_NULL_HANDLE,
-			&imageIndex
-		);
-		if (result == VK_ERROR_OUT_OF_DATE_KHR) {
-			//recreateSwapChain();
-			return;
-		}
-
-		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
-			throw std::runtime_error("failed to acquire swap chain image!");
+		if (imageIndex == uint32_t(-1))
+		{
+			VkResult result = vkAcquireNextImageKHR
+			(
+				m_Device,
+				m_SwapChain,
+				UINT64_MAX,
+				m_ImageAvailableSemaphores[m_CurrentFrame],
+				VK_NULL_HANDLE,
+				&imageIndex
+			);
+			if (result == VK_ERROR_OUT_OF_DATE_KHR) {
+				//recreateSwapChain();
+				return;
+			}
+			else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+				throw std::runtime_error("failed to acquire swap chain image!");
+			}
 		}
 
 		m_Camera.update(time);
@@ -118,27 +118,36 @@ public:
 
 		vkResetCommandBuffer(m_CommandBuffers[m_CurrentFrame], 0);
 
-		
-		ImGui::Render();
-
 		recordCommandBuffer(imageIndex, renderStart, count, m_CurrentFrame);
 
 		VkSubmitInfo submitInfo{};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-		VkSemaphore waitSemaphores[] = { m_ImageAvailableSemaphores[m_CurrentFrame] };
+		VkSemaphore waitSemaphores[] = { m_ImageAvailableSemaphores[m_CurrentFrame]};
 		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
 
-		std::array<VkCommandBuffer, 1> submitCommandBuffers =
-		{ m_CommandBuffers[m_CurrentFrame] };
+		std::vector< VkCommandBuffer> submitCommandBuffers;
 
+		if (ImGuiCommandBuffer == VK_NULL_HANDLE)
+		{
+			submitCommandBuffers.resize(1);
+			submitCommandBuffers[0] = m_CommandBuffers[m_CurrentFrame];
+		}
+		else
+		{
+			submitCommandBuffers.resize(2);
+			submitCommandBuffers[0] = m_CommandBuffers[m_CurrentFrame];
+			submitCommandBuffers[1] = ImGuiCommandBuffer;
+		}
+
+		
 		submitInfo.waitSemaphoreCount = 1;
 		submitInfo.pWaitSemaphores = waitSemaphores;
 		submitInfo.pWaitDstStageMask = waitStages;
 		submitInfo.commandBufferCount = static_cast<uint32_t>(submitCommandBuffers.size());
 		submitInfo.pCommandBuffers = submitCommandBuffers.data();
 
-		VkSemaphore signalSemaphores[] = { m_RenderFinishedSemaphores[m_CurrentFrame] };
+		VkSemaphore signalSemaphores[] = { m_RenderFinishedSemaphores[m_CurrentFrame]};
 		submitInfo.signalSemaphoreCount = 1;
 		submitInfo.pSignalSemaphores = signalSemaphores;
 
@@ -158,13 +167,7 @@ public:
 
 		presentInfo.pImageIndices = &imageIndex;
 
-		result = vkQueuePresentKHR(m_PresentQueue, &presentInfo);
-
-		ImGuiIO& io = ImGui::GetIO();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-		}
+		VkResult result = vkQueuePresentKHR(m_PresentQueue, &presentInfo);
 
 		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || m_FramebufferResized) {
 			m_FramebufferResized = false;
@@ -256,8 +259,6 @@ private:
 				vkCmdDrawIndexed(m_CommandBuffers[m_CurrentFrame], static_cast<uint32_t>(renderData->meshData.getIndexCount()), 1, 0, 0, 0);
 			}
 		}
-
-		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffers[m_CurrentFrame]);
 
 		vkCmdEndRenderPass(m_CommandBuffers[m_CurrentFrame]);
 
@@ -526,7 +527,6 @@ private:
 	}
 	
 public:
-
 	Camera m_Camera;
 
 	GLFWwindow* m_Window;
@@ -564,6 +564,7 @@ public:
 
 	std::vector<VkSemaphore> m_ImageAvailableSemaphores;
 	std::vector<VkSemaphore> m_RenderFinishedSemaphores;
+	
 	std::vector<VkFence> m_InFlightFences;
 
 	Helper::QueueFamilyIndicies queueFamilyIndicies;
@@ -572,7 +573,7 @@ public:
 
 	int m_max_frames_in_flight;
 
-
+	uint32_t m_ImageCount;
 
 	bool m_FramebufferResized = false;	
 };
