@@ -1,14 +1,5 @@
 #include "Camera.h"
 
-Camera::Camera(float fov, float width, float height, float fnear, float ffar, glm::vec3 position, GLFWwindow* window)
-	: m_ProjectionMatrix(glm::perspective(glm::radians(fov), width / height, fnear, ffar)), m_Position(position), m_Window(window), m_Width(width), m_Height(height)
-{
-	m_ProjectionMatrix[1][1] *= -1;
-	RecaluclateViewMatrix();
-	glfwSetCursorPos(m_Window, m_LastX, m_LastY);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-}
-
 void Camera::update(float time)
 {
 	GLFWwindow* window = m_Window;

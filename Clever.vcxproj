@@ -121,6 +121,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Clever\src\Clever\Camera\Camera.h" />
+    <ClInclude Include="Clever\src\Clever\Entry\Clever.h" />
+    <ClInclude Include="Clever\src\Clever\Entry\ManagerReferenceTable.h" />
+    <ClInclude Include="Clever\src\Clever\EventSystem\CleverKeyCodes.h" />
     <ClInclude Include="Clever\src\Clever\EventSystem\EventManager.h" />
     <ClInclude Include="Clever\src\Clever\Material\MaterialManager.h" />
     <ClInclude Include="Clever\src\Clever\Window\WindowManager.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="Clever\src\Clever\WorldManager\Vertex.h" />
     <ClInclude Include="Clever\src\Clever\WorldManager\WorldManager.h" />
     <ClInclude Include="Clever\src\Clever\Developer\DevTools.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\GLFW\GLFWConversionTable.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiManager.h" />
     <ClInclude Include="Clever\src\Clever\Developer\DockManager.h" />
     <ClInclude Include="Clever\src\OS-Dependant\ImGui\ImGuiSrc\imconfig.h" />

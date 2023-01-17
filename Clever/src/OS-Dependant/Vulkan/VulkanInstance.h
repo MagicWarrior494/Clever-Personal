@@ -35,249 +35,35 @@ private:
 	};
 public:
 
-	void cleanup()
-	{
-		cleanupSwapChain();
-		
-		for (size_t i = 0; i < m_max_frames_in_flight; i++)
-		{
-			vkDestroyBuffer(m_Device, m_UniformBuffers[i], nullptr);
-			vkFreeMemory(m_Device, m_UniformBuffersMemory[i], nullptr);
-		}
-			
-		for (size_t i = 0; i < m_max_frames_in_flight; i++) {
-			vkDestroySemaphore(m_Device, m_RenderFinishedSemaphores[i], nullptr);
-			vkDestroySemaphore(m_Device, m_ImageAvailableSemaphores[i], nullptr);
-			vkDestroyFence(m_Device, m_InFlightFences[i], nullptr);
-		}
+	void cleanup();
 
-		vkDestroyRenderPass(m_Device, m_RenderPass, nullptr);
-
-		vkDestroyCommandPool(m_Device, m_CommandPool, nullptr);
-
-		vkDestroyDevice(m_Device, nullptr);
-
-		vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
-
-		
-
-		//! Destroys Validation Layers
-		{
-			auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(m_Instance, "vkDestroyDebugUtilsMessengerEXT");
-			if (func != nullptr) {
-				func(m_Instance, m_DebugMessenger, nullptr);
-			}
-		}
-
-		vkDestroyInstance(m_Instance, nullptr);
-
-		glfwDestroyWindow(m_Window);
-		glfwTerminate();
-	}
-
-	VulkanInstance(int height, int width, int max_frames_in_flight, bool RTXEnable) :
-		m_SwapChainExtent({ static_cast<uint32_t>(height), static_cast<uint32_t>(width) }), m_max_frames_in_flight(max_frames_in_flight)
-	{
-		createInstance();
-		m_Camera = Camera(45.0f, height, width, 0.1f, 1000.0f, glm::vec3(3, 1, 8), m_Window);
-	}
+	VulkanInstance(int height, int width, int max_frames_in_flight, bool RTXEnable);
 
 	GLFWwindow* getGLFWwindow()
 	{
 		return m_Window;
 	}
 
-	void render(float time, Renderable* renderStart, VkCommandBuffer ImGuiCommandBuffer, uint32_t count, uint32_t m_CurrentFrame, uint32_t imageIndex)
-	{
-		vkWaitForFences(m_Device, 1, &m_InFlightFences[m_CurrentFrame], VK_TRUE, UINT64_MAX);
-
-		if (imageIndex == uint32_t(-1))
-		{
-			VkResult result = vkAcquireNextImageKHR
-			(
-				m_Device,
-				m_SwapChain,
-				UINT64_MAX,
-				m_ImageAvailableSemaphores[m_CurrentFrame],
-				VK_NULL_HANDLE,
-				&imageIndex
-			);
-			if (result == VK_ERROR_OUT_OF_DATE_KHR) {
-				//recreateSwapChain();
-				return;
-			}
-			else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
-				throw std::runtime_error("failed to acquire swap chain image!");
-			}
-		}
-
-		m_Camera.update(time);
-		updateUniformBuffer(m_CurrentFrame, time);
-
-		vkResetFences(m_Device, 1, &m_InFlightFences[m_CurrentFrame]);
-
-		vkResetCommandBuffer(m_CommandBuffers[m_CurrentFrame], 0);
-
-		recordCommandBuffer(imageIndex, renderStart, count, m_CurrentFrame);
-
-		VkSubmitInfo submitInfo{};
-		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-
-		VkSemaphore waitSemaphores[] = { m_ImageAvailableSemaphores[m_CurrentFrame]};
-		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
-
-		std::vector< VkCommandBuffer> submitCommandBuffers;
-
-		if (ImGuiCommandBuffer == VK_NULL_HANDLE)
-		{
-			submitCommandBuffers.resize(1);
-			submitCommandBuffers[0] = m_CommandBuffers[m_CurrentFrame];
-		}
-		else
-		{
-			submitCommandBuffers.resize(2);
-			submitCommandBuffers[0] = m_CommandBuffers[m_CurrentFrame];
-			submitCommandBuffers[1] = ImGuiCommandBuffer;
-		}
-
-		
-		submitInfo.waitSemaphoreCount = 1;
-		submitInfo.pWaitSemaphores = waitSemaphores;
-		submitInfo.pWaitDstStageMask = waitStages;
-		submitInfo.commandBufferCount = static_cast<uint32_t>(submitCommandBuffers.size());
-		submitInfo.pCommandBuffers = submitCommandBuffers.data();
-
-		VkSemaphore signalSemaphores[] = { m_RenderFinishedSemaphores[m_CurrentFrame]};
-		submitInfo.signalSemaphoreCount = 1;
-		submitInfo.pSignalSemaphores = signalSemaphores;
-
-		if (vkQueueSubmit(m_GraphicsQueue, 1, &submitInfo, m_InFlightFences[m_CurrentFrame]) != VK_SUCCESS) {
-			throw std::runtime_error("failed to submit draw command buffer!");
-		}
-
-		VkPresentInfoKHR presentInfo{};
-		presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-
-		presentInfo.waitSemaphoreCount = 1;
-		presentInfo.pWaitSemaphores = signalSemaphores;
-
-		VkSwapchainKHR swapChains[] = { m_SwapChain };
-		presentInfo.swapchainCount = 1;
-		presentInfo.pSwapchains = swapChains;
-
-		presentInfo.pImageIndices = &imageIndex;
-
-		VkResult result = vkQueuePresentKHR(m_PresentQueue, &presentInfo);
-
-		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || m_FramebufferResized) {
-			m_FramebufferResized = false;
-			//recreateSwapChain();
-		}
-		else if (result != VK_SUCCESS) {
-			throw std::runtime_error("failed to present swap chain image!");
-		}
-	}
+	bool render(float time, Renderable* renderStart, VkCommandBuffer ImGuiCommandBuffer, uint32_t count, uint32_t m_CurrentFrame, uint32_t imageIndex);
 
 	bool shouldClose()
 	{
 		return glfwWindowShouldClose(m_Window);
 	}
 
+	void recreateSwapChain();
+
 private:
-	void cleanupSwapChain() {
-		vkDestroyImageView(m_Device, depthImageView, nullptr);
-		vkDestroyImage(m_Device, depthImage, nullptr);
-		vkFreeMemory(m_Device, depthImageMemory, nullptr);
+	void cleanupSwapChain();
 
-		for (auto framebuffer : m_FrameBuffers) {
-			vkDestroyFramebuffer(m_Device, framebuffer, nullptr);
-		}
+	void createSwapChain();
+	void createImageViews();
+	void createDepthResources();
+	void createFramebuffers();
 
-		for (auto imageView : m_ImageViews) {
-			vkDestroyImageView(m_Device, imageView, nullptr);
-		}
+	void recordCommandBuffer(uint32_t imageIndex, Renderable* renderStart, uint32_t count, uint32_t m_CurrentFrame);
 
-		vkDestroySwapchainKHR(m_Device, m_SwapChain, nullptr);
-	}
-
-	void recordCommandBuffer(uint32_t imageIndex, Renderable* renderStart, uint32_t count, uint32_t m_CurrentFrame)
-	{
-		VkCommandBufferBeginInfo beginInfo{};
-		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-
-		if (vkBeginCommandBuffer(m_CommandBuffers[m_CurrentFrame], &beginInfo) != VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to begin recording command buffer!");
-		}
-
-		std::array<VkClearValue, 2> clearValues{};
-		clearValues[0].color = m_ClearValue.color;
-		clearValues[1].depthStencil = { 1.0f, 0 };
-
-		VkRenderPassBeginInfo renderPassInfo{};
-		renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-		renderPassInfo.renderPass = m_RenderPass;
-		renderPassInfo.framebuffer = m_FrameBuffers[imageIndex];
-		renderPassInfo.renderArea.offset = { 0,0 };
-		renderPassInfo.renderArea.extent = m_SwapChainExtent;
-		renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
-		renderPassInfo.pClearValues = clearValues.data();
-
-		VkViewport viewport{};
-		viewport.x = 0.0f;
-		viewport.y = 0.0f;
-		viewport.width = static_cast<float>(m_SwapChainExtent.width);
-		viewport.height = static_cast<float>(m_SwapChainExtent.height);
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-		vkCmdSetViewport(m_CommandBuffers[m_CurrentFrame], 0, 1, &viewport);
-
-		VkRect2D scissor{};
-		scissor.offset = { 0, 0 };
-		scissor.extent = m_SwapChainExtent;
-		vkCmdSetScissor(m_CommandBuffers[m_CurrentFrame], 0, 1, &scissor);
-
-		vkCmdBeginRenderPass(m_CommandBuffers[m_CurrentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
-		for(uint32_t i = 0; i < count; i++)
-		{
-			Renderable* renderData = (renderStart + (int)i);
-			VkBuffer vertexBuffers[] = { renderData->meshData.vertexBuffer };
-			VkDeviceSize offsets[] = { 0 };
-			vkCmdBindPipeline(m_CommandBuffers[m_CurrentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, renderData->pipelineInfo.graphicsPipeline);
-
-			vkCmdBindVertexBuffers(m_CommandBuffers[m_CurrentFrame], 0, 1, vertexBuffers, offsets);
-
-			vkCmdBindIndexBuffer(m_CommandBuffers[m_CurrentFrame], renderData->meshData.indexBuffer, 0, VK_INDEX_TYPE_UINT16);
-
-			vkCmdBindDescriptorSets(m_CommandBuffers[m_CurrentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, renderData->pipelineInfo.pipelineLayout, 0, 1, &renderData->pipelineInfo.descriptorSets[m_CurrentFrame], 0, nullptr);
-
-			for (int x = 0; x < renderData->pipelineInfo.instances.size(); x++)
-			{
-				vkCmdPushConstants(m_CommandBuffers[m_CurrentFrame], renderData->pipelineInfo.pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(renderData->pipelineInfo.instances[x]), &renderData->pipelineInfo.instances[x]);
-
-				vkCmdDrawIndexed(m_CommandBuffers[m_CurrentFrame], static_cast<uint32_t>(renderData->meshData.getIndexCount()), 1, 0, 0, 0);
-			}
-		}
-
-		vkCmdEndRenderPass(m_CommandBuffers[m_CurrentFrame]);
-
-		if (vkEndCommandBuffer(m_CommandBuffers[m_CurrentFrame]) != VK_SUCCESS) {
-			throw std::runtime_error("failed to record command buffer!");
-		}
-	}
-
-	void updateUniformBuffer(uint32_t currentFrame, float time) {
-		
-
-		UniformBufferObject ubo{};
-		ubo.viewproj = m_Camera.GetViewProjectionMatrix();
-		/*ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		ubo.proj = glm::perspective(glm::radians(45.0f), m_SwapChainExtent.width / (float)m_SwapChainExtent.height, 0.1f, 10.0f);
-		ubo.proj[1][1] *= -1;*/
-		memcpy(m_UniformBuffersMapped[currentFrame], &ubo, sizeof(ubo));
-
-	}
+	void updateUniformBuffer(uint32_t currentFrame, float time);
 
 	void createInstance();
 
@@ -480,7 +266,7 @@ private:
 		vkBindBufferMemory(m_Device, buffer, bufferMemory, 0);
 	}
 	
-	public:
+public:
 	
 	VkCommandBuffer beginSingleTimeCommands() {
 		VkCommandBufferAllocateInfo allocInfo{};
@@ -527,7 +313,7 @@ private:
 	}
 	
 public:
-	Camera m_Camera;
+	std::shared_ptr<Camera> m_Camera;
 
 	GLFWwindow* m_Window;
 

@@ -1,9 +1,9 @@
 #pragma once
 #include "Components/ComponentManager.h"
 #include "OS-Dependant/Vulkan/VulkanInstance.h"
-#include "Clever/Window/WindowManager.h"
 #include "Object/ObjectManager.h"
 #include "Clever/Developer/DevTools.h"
+#include "Clever/EventSystem/EventManager.h"
 #include <iostream>
 #include <string>
 
@@ -21,8 +21,6 @@ namespace World
 
 		void addRay()
 		{
-			//Window::WindowManager window = Window::WindowManager::getInstance();
-
 			int count = ray.getInstanceCount();
 			ray.setInstanceCount(count + 1);
 			//window.getVulkan()->m_Camera.GetPosition() + 
@@ -41,15 +39,22 @@ namespace World
 			DevTools::newDock("Entities");
 			DevTools::coloredText(glm::vec3(0.25, 0.76, 0.50), "This is PRetty Cool");
 			if (DevTools::button("AddRay"))
-			{
+			{  
 				world->addRay();
 			}
 			DevTools::endDock();
 		}
 
+		static void worldUI2 (std::vector<void*> classInstances)
+		{
+			DevTools::newDock("fdsafads");
+			DevTools::coloredText(glm::vec3(0.25, 0.76, 0.50), "Seonds Window test");
+			DevTools::endDock();
+		}
+
 		WorldManager()
 		{
-			DevTools::addDockFunction(worldUI, { this,  });
+			
 		}
 		~WorldManager()
 		{
@@ -57,7 +62,13 @@ namespace World
 		}
 		void worldInit(std::shared_ptr<VulkanInstance> vulkanInstance, WorldFlags flags = {})
 		{
-			camera = &vulkanInstance->m_Camera;
+
+			//Registering INGUI window dock function
+			DevTools::addDockFunction(worldUI, { this });
+			DevTools::addDockFunction(worldUI2, { this });
+
+			camera = vulkanInstance->m_Camera;
+
 			//Registering All Components before any entities are created
 			{
 
@@ -90,6 +101,14 @@ namespace World
 			//addRay();
 		}
 
+		void update()
+		{
+			if (Event::EventManager::isKeyPressed(KEY_R))
+			{
+				addRay();
+			}
+		}
+
 		Renderable* getRenderables()
 		{
 			return componentManager.getComponentArray<Renderable>();
@@ -108,10 +127,10 @@ namespace World
 	private:
 		ComponentManager componentManager{};
 
+		std::shared_ptr<Camera> camera;
+
 		Renderable ray;
 		Renderable loadedObject;
-
-		Camera* camera;
 
 		std::vector<Vertex> vertices = {
 		{{0.0, -1.0, 0.0}, {0.2f, 0.1f, 0.5f}},

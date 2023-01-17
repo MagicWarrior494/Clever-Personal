@@ -4,6 +4,7 @@
 #include <array>
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include "Clever/Developer/DevTools.h"
 
 enum class Camera_Movement {
 	FORWARD,
@@ -18,13 +19,31 @@ class Camera
 {
 
 public:
-	Camera()
+	Camera(float fov, float width, float height, float fnear, float ffar, glm::vec3 position, GLFWwindow* window)
+		: m_ProjectionMatrix(glm::perspective(glm::radians(fov), width / height, fnear, ffar)), m_Position(position), m_Window(window), m_Width(width), m_Height(height)
 	{
-
+		m_ProjectionMatrix[1][1] *= -1;
+		RecaluclateViewMatrix();
+		glfwSetCursorPos(m_Window, m_LastX, m_LastY);
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		std::cout << "Im Creating a new Camera" << std::endl;
+		
 	}
-	Camera(float fov, float width, float height, float fnear, float ffar, glm::vec3 position, GLFWwindow* window);
+
+	void init()
+	{
+		DevTools::addDockFunction(cameraGui, { this });
+	}
 
 	void update(float time);
+
+	static void cameraGui(std::vector<void*> classInstances)
+	{
+		Camera* camera = (Camera*)classInstances.at(0);
+		DevTools::newDock("Camera-Settings");
+		DevTools::floatSlider("Camera Speed: ", camera->GetMovementSpeed(), 0, 100);
+		DevTools::endDock();
+	}
 
 	std::pair<float, float> getMousePosition();
 
@@ -52,10 +71,14 @@ public:
 	const glm::mat4& GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
 	void RecaluclateViewMatrix();
-	const void SetMovementSpeed(float CameraSpeed) { m_CameraSpeed = CameraSpeed; }
-	const float GetMovementSpeed() { return m_CameraSpeed; }
-	const void SetRotationSpeed(float CameraSpeed) { MouseSensitivity = CameraSpeed; }
-	const float GetRotationSpeed() { return MouseSensitivity; }
+	void SetMovementSpeed(float CameraSpeed) { m_CameraSpeed = CameraSpeed; }
+	float* GetMovementSpeed() { return &m_CameraSpeed; }
+	void SetRotationSpeed(float CameraSpeed) { MouseSensitivity = CameraSpeed; }
+	float GetRotationSpeed() { return MouseSensitivity; }
+
+public:
+	float m_CameraSpeed = 1.0f;
+
 private:
 	int m_Width, m_Height;
 
@@ -76,7 +99,7 @@ private:
 	glm::vec3 m_Velocity = { 0,0,0 };
 	glm::vec3 m_Front = { 0.0f, 0.0f, -1.0f };
 	glm::vec3 m_Right = { -1, 0, 0 };
-	float m_CameraSpeed = 1000.0f;
+	
 
 	float Yaw = -90.0f;
 	float Pitch = 0.0f;

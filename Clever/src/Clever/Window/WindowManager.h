@@ -26,51 +26,49 @@ namespace Window
 
 		}
 
+		static void testWindow()
+		{
+			DevTools::newDock("Test");
+			DevTools::coloredText({0.5, 0.2, 0.7}, "Test-Test");
+			DevTools::endDock();
+		}
+
 		void WindowInit(WindowFlags flags = {})
 		{
 			m_Flags = flags;
 			m_VulkanInstance.reset(new VulkanInstance(flags.width, flags.height, flags.max_frames_in_flight, flags.RTXEnable));
+			m_VulkanInstance->m_Camera->init();
 			if (m_Flags.DeveloperMode)
 			{
 				m_ImGuiManager = ImGuiManager();
 				m_ImGuiManager.bind(m_VulkanInstance, m_CurrentFrame);
 			}
-			m_Camera = Camera(90.0f, flags.width, flags.height, 0.1f, 10.0f, glm::vec3(0, 0, 0), m_VulkanInstance->getGLFWwindow());
+			
+			DevTools::addDockFunction(testWindow, {this});
 		}
 
-		void render(Renderable* renderableStart, uint32_t count)
-		{
-			static auto startTime = std::chrono::high_resolution_clock::now();
-
-			auto currentTime = std::chrono::high_resolution_clock::now();
-			float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
-			float timeDelta = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - lastTime).count();
-
-			glfwPollEvents();
+		void render(Renderable* renderableStart, uint32_t count, float deltaTime)
+		{	
 			uint32_t imageIndex = -1;
 			VkCommandBuffer ImGuiCommandBuffer = VK_NULL_HANDLE;
 			if (m_Flags.DeveloperMode)
 			{
 				m_ImGuiManager.newFrame();
-				m_ImGuiManager.showDemoWindow();
 
 				DevTools::BuildCustomUI();
 
-				m_ImGuiManager.ImGuiCustomRender();
-
 				imageIndex = m_ImGuiManager.render(m_VulkanInstance, m_CurrentFrame);
-				ImGuiCommandBuffer = m_ImGuiManager.getCommandBuffer(m_CurrentFrame);
+				if (imageIndex != -1)
+					ImGuiCommandBuffer = m_ImGuiManager.getCommandBuffer(m_CurrentFrame);
+				else
+					m_ImGuiManager.endFrame();
+			}
+			bool recreate = m_VulkanInstance->render(deltaTime, renderableStart, ImGuiCommandBuffer, count, m_CurrentFrame, imageIndex);
+			if (recreate)
+			{
+				m_ImGuiManager.recreateFrameBuffer(m_VulkanInstance);
 			}
 
-			m_VulkanInstance->render(timeDelta, renderableStart, ImGuiCommandBuffer, count, m_CurrentFrame, imageIndex);
-			frameCounter++;
-			if (time - counter >= 1)
-			{
-				std::cout << "FPS: " << frameCounter << std::endl;
-				counter++;
-				frameCounter = 0;
-			}
-			lastTime = std::chrono::high_resolution_clock::now();
 
 			m_CurrentFrame = (m_CurrentFrame + 1) % m_VulkanInstance->m_max_frames_in_flight;
 		}
@@ -114,16 +112,16 @@ namespace Window
 			return m_Flags;
 		}
 
+		Camera getCamera()
+		{
+			return *m_VulkanInstance->m_Camera;
+		}
+
 	private:
-		Camera m_Camera;
 		std::shared_ptr<VulkanInstance> m_VulkanInstance;
 		ImGuiManager m_ImGuiManager;
 		WindowFlags m_Flags;
 
 		uint32_t m_CurrentFrame = 0;
-
-		int counter = 0;
-		int frameCounter = 0;
-		std::chrono::time_point<std::chrono::steady_clock> lastTime;
 	};
 }

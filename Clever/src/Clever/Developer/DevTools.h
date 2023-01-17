@@ -24,9 +24,9 @@ namespace DevTools
 		return ImGui::Button(label.c_str(), ImVec2(size.x, size.y));
 	}
 
-	static void floatSlider(float value, float min, float max)
+	static void floatSlider(std::string label, float* value, float min, float max)
 	{
-		//ImGui::SliderFloat(value, min, max);
+		ImGui::SliderFloat(label.c_str(), value, min, max, "%f", 1);
 	}
 
 	static void endDock()

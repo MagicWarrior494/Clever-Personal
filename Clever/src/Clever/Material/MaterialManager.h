@@ -49,6 +49,11 @@ namespace Material
 
 	public:
 
+		class MaterialManager()
+		{
+
+		}
+
 		void MaterialInit(MaterialFlags materialFlags)
 		{
 			loadMaterial(materialFlags.materialFilePath);

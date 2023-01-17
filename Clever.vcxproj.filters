@@ -534,6 +534,10 @@
     <ClInclude Include="Clever\src\Clever\Developer\DevTools.h" />
     <ClInclude Include="Clever\src\Clever\Developer\DockManager.h" />
     <ClInclude Include="Clever\src\Clever\EventSystem\EventManager.h" />
+    <ClInclude Include="Clever\src\Clever\Entry\Clever.h" />
+    <ClInclude Include="Clever\src\Clever\EventSystem\CleverKeyCodes.h" />
+    <ClInclude Include="Clever\src\OS-Dependant\GLFW\GLFWConversionTable.h" />
+    <ClInclude Include="Clever\src\Clever\Entry\ManagerReferenceTable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clever\src\Clever\Camera\Camera.cpp">
